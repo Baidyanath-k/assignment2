@@ -38,9 +38,27 @@ const fetchedAllProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(200).json({
+    res.status(500).json({
       success: false,
       message: "Do not found all products",
+      error: error.message,
+    });
+  }
+};
+
+const fetchedProductById = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const result = await ProductServices.fetchedProductByIdIntoDB(productId);
+    res.status(200).json({
+      success: true,
+      message: "Product fetched successfully!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: "Can not product fetched!",
       error: error.message,
     });
   }
@@ -49,4 +67,5 @@ const fetchedAllProduct = async (req: Request, res: Response) => {
 export const ProductControllers = {
   createProductController,
   fetchedAllProduct,
+  fetchedProductById,
 };

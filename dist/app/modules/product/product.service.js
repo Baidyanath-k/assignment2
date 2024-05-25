@@ -19,7 +19,12 @@ const fetchedAllProductIntoDB = () => __awaiter(void 0, void 0, void 0, function
     const result = yield product_model_1.ProductModel.find();
     return result;
 });
+const fetchedProductByIdIntoDB = (_id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.ProductModel.findById({ _id });
+    return result;
+});
 exports.ProductServices = {
     createProductIntoDB,
     fetchedAllProductIntoDB,
+    fetchedProductByIdIntoDB,
 };

@@ -51,9 +51,27 @@ const fetchedAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
     catch (error) {
-        res.status(200).json({
+        res.status(500).json({
             success: false,
             message: "Do not found all products",
+            error: error.message,
+        });
+    }
+});
+const fetchedProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { productId } = req.params;
+        const result = yield product_service_1.ProductServices.fetchedProductByIdIntoDB(productId);
+        res.status(200).json({
+            success: true,
+            message: "Product fetched successfully!",
+            data: result,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Can not product fetched!",
             error: error.message,
         });
     }
@@ -61,4 +79,5 @@ const fetchedAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, functi
 exports.ProductControllers = {
     createProductController,
     fetchedAllProduct,
+    fetchedProductById,
 };
