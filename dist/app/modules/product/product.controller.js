@@ -76,8 +76,28 @@ const fetchedProductById = (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
     }
 });
+const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { productId } = req.params;
+        const updateData = req.body;
+        const result = yield product_service_1.ProductServices.updateProductIntoDB(productId, updateData);
+        res.status(400).json({
+            success: true,
+            message: "Product updated successfully!",
+            data: result,
+        });
+    }
+    catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Product can not update",
+            error: error.message,
+        });
+    }
+});
 exports.ProductControllers = {
     createProductController,
     fetchedAllProduct,
     fetchedProductById,
+    updateProduct,
 };

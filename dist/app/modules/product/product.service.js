@@ -23,8 +23,15 @@ const fetchedProductByIdIntoDB = (_id) => __awaiter(void 0, void 0, void 0, func
     const result = yield product_model_1.ProductModel.findById({ _id });
     return result;
 });
+const updateProductIntoDB = (_id, updateData) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.ProductModel.findByIdAndUpdate(_id, updateData, {
+        new: true,
+    });
+    return result;
+});
 exports.ProductServices = {
     createProductIntoDB,
     fetchedAllProductIntoDB,
     fetchedProductByIdIntoDB,
+    updateProductIntoDB,
 };
