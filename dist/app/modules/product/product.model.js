@@ -25,7 +25,7 @@ const ProductSchema = new mongoose_1.Schema({
     },
     price: {
         type: Number,
-        require: true,
+        required: [true, "Product price must be required"],
     },
     category: {
         type: String,
@@ -36,12 +36,12 @@ const ProductSchema = new mongoose_1.Schema({
     },
     variants: {
         type: [VariantSchema],
-        require: true,
+        require: [true, "Variants must be required"],
     },
     inventory: {
         quantity: {
             type: Number,
-            required: true,
+            required: [true, "Product Quantity must be required"],
         },
         inStock: {
             type: Boolean,

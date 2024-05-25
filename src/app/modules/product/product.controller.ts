@@ -29,6 +29,24 @@ const createProductController = async (req: Request, res: Response) => {
   }
 };
 
+const fetchedAllProduct = async (req: Request, res: Response) => {
+  try {
+    const result = await ProductServices.fetchedAllProductIntoDB();
+    res.status(200).json({
+      success: true,
+      message: "Products fetched successfully!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(200).json({
+      success: false,
+      message: "Do not found all products",
+      error: error.message,
+    });
+  }
+};
+
 export const ProductControllers = {
   createProductController,
+  fetchedAllProduct,
 };
