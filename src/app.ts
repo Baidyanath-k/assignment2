@@ -1,5 +1,6 @@
 import cors from "cors";
 import express, { Request, Response } from "express";
+import { OrderRoutes } from "./app/modules/order/order.route";
 import { ProductRoutes } from "./app/modules/product/product.route";
 const app = express();
 
@@ -9,6 +10,7 @@ app.use(cors());
 
 // application route
 app.use("/api/products", ProductRoutes);
+app.use("/api/orders", OrderRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("E-commerce App Build");
