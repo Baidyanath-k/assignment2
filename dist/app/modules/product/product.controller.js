@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductControllers = void 0;
 const product_joiValidation_1 = __importDefault(require("./product.joiValidation"));
 const product_service_1 = require("./product.service");
+// created product
 const createProductController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { product: product_data } = req.body;
@@ -41,6 +42,7 @@ const createProductController = (req, res) => __awaiter(void 0, void 0, void 0, 
         });
     }
 });
+// Fetched all product
 const fetchedAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield product_service_1.ProductServices.fetchedAllProductIntoDB();
@@ -58,6 +60,7 @@ const fetchedAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
 });
+// Fetched Product By Id
 const fetchedProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
@@ -76,6 +79,7 @@ const fetchedProductById = (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
     }
 });
+// Update product By Id
 const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
@@ -114,10 +118,30 @@ const deleteProductById = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
 });
+// search operation by key
+const searchOperation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const searchTerm = req.query.searchTerm;
+        const result = yield product_service_1.ProductServices.searchOperationIntoDB(searchTerm);
+        res.status(200).json({
+            success: true,
+            message: `Products matching search term '${searchTerm}' fetched successfully!`,
+            data: result,
+        });
+    }
+    catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Do not found product",
+            error: error.message,
+        });
+    }
+});
 exports.ProductControllers = {
     createProductController,
     fetchedAllProduct,
     fetchedProductById,
     updateProduct,
     deleteProductById,
+    searchOperation,
 };

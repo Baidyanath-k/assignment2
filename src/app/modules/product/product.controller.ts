@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import ProductJoiSchema from "./product.joiValidation";
 import { ProductServices } from "./product.service";
 
+// created product
 const createProductController = async (req: Request, res: Response) => {
   try {
     const { product: product_data } = req.body;
@@ -29,6 +30,7 @@ const createProductController = async (req: Request, res: Response) => {
   }
 };
 
+// Fetched all product
 const fetchedAllProduct = async (req: Request, res: Response) => {
   try {
     const result = await ProductServices.fetchedAllProductIntoDB();
@@ -46,6 +48,7 @@ const fetchedAllProduct = async (req: Request, res: Response) => {
   }
 };
 
+// Fetched Product By Id
 const fetchedProductById = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -64,6 +67,7 @@ const fetchedProductById = async (req: Request, res: Response) => {
   }
 };
 
+// Update product By Id
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -88,7 +92,6 @@ const updateProduct = async (req: Request, res: Response) => {
 };
 
 // Delete Product By Id
-
 const deleteProductById = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -107,10 +110,34 @@ const deleteProductById = async (req: Request, res: Response) => {
   }
 };
 
+// search operation by key
+
+const searchOperation = async (req: Request, res: Response) => {
+  try {
+    const searchTerm = req.query.searchTerm;
+
+    const result = await ProductServices.searchOperationIntoDB(
+      searchTerm as string
+    );
+    res.status(200).json({
+      success: true,
+      message: `Products matching search term '${searchTerm}' fetched successfully!`,
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: "Do not found product",
+      error: error.message,
+    });
+  }
+};
+
 export const ProductControllers = {
   createProductController,
   fetchedAllProduct,
   fetchedProductById,
   updateProduct,
   deleteProductById,
+  searchOperation,
 };
