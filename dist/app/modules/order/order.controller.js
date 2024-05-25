@@ -8,13 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderController = void 0;
+const order_joivalidation_1 = __importDefault(require("./order.joivalidation"));
 const order_service_1 = require("./order.service");
 const createOrderCont = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { order: order_data } = req.body;
-        const result = yield order_service_1.OrderServices.createOrderIntoDB(order_data);
+        const { error, value } = order_joivalidation_1.default.validate(order_data);
+        if (error) {
+            res.status(400).json({
+                success: false,
+                message: "An error occurred while creating the order",
+                error: error.message,
+            });
+        }
+        const result = yield order_service_1.OrderServices.createOrderIntoDB(value);
         res.status(400).json({
             success: true,
             message: "Order created successfully!",
