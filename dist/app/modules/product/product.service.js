@@ -29,9 +29,14 @@ const updateProductIntoDB = (_id, updateData) => __awaiter(void 0, void 0, void 
     });
     return result;
 });
+const deleteProductByIdIntoDB = (_id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.ProductModel.deleteOne({ _id });
+    return result;
+});
 exports.ProductServices = {
     createProductIntoDB,
     fetchedAllProductIntoDB,
     fetchedProductByIdIntoDB,
     updateProductIntoDB,
+    deleteProductByIdIntoDB,
 };

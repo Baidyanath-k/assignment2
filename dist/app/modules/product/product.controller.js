@@ -95,9 +95,29 @@ const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
 });
+// Delete Product By Id
+const deleteProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { productId } = req.params;
+        const result = yield product_service_1.ProductServices.deleteProductByIdIntoDB(productId);
+        res.status(200).json({
+            success: true,
+            message: "Product deleted successfully!",
+            data: result,
+        });
+    }
+    catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Product do not deleted!",
+            error: error.message,
+        });
+    }
+});
 exports.ProductControllers = {
     createProductController,
     fetchedAllProduct,
     fetchedProductById,
     updateProduct,
+    deleteProductById,
 };
