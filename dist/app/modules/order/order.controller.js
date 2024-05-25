@@ -58,7 +58,26 @@ const getAllOrderCont = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
 });
+const orderFetchedInEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const email = req.query.email;
+        const result = yield order_service_1.OrderServices.orderFetchedInEmailIntoDB(email);
+        res.status(400).json({
+            success: true,
+            message: "Orders fetched successfully for user email!",
+            data: result,
+        });
+    }
+    catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Orders fetched unsuccessfully for user email!",
+            error: error.message,
+        });
+    }
+});
 exports.OrderController = {
     createOrderCont,
     getAllOrderCont,
+    orderFetchedInEmail,
 };

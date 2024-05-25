@@ -20,7 +20,14 @@ const getAllOrderIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield order_model_1.OrderModel.find();
     return result;
 });
+const orderFetchedInEmailIntoDB = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield order_model_1.OrderModel.find({
+        $or: [{ email: { $regex: email, $options: "i" } }],
+    }).exec();
+    return result;
+});
 exports.OrderServices = {
     createOrderIntoDB,
     getAllOrderIntoDB,
+    orderFetchedInEmailIntoDB,
 };

@@ -12,7 +12,15 @@ const getAllOrderIntoDB = async () => {
   return result;
 };
 
+const orderFetchedInEmailIntoDB = async (email: string) => {
+  const result = await OrderModel.find({
+    $or: [{ email: { $regex: email, $options: "i" } }],
+  }).exec();
+
+  return result;
+};
 export const OrderServices = {
   createOrderIntoDB,
   getAllOrderIntoDB,
+  orderFetchedInEmailIntoDB,
 };
