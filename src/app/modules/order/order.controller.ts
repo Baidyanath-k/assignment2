@@ -28,6 +28,24 @@ const createOrderCont = async (req: Request, res: Response) => {
   }
 };
 
+const getAllOrderCont = async (req: Request, res: Response) => {
+  try {
+    const result = await OrderServices.getAllOrderIntoDB();
+    res.status(400).json({
+      success: true,
+      message: "Orders fetched successfully!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: "All Order data do not retrieve",
+      error: error.message,
+    });
+  }
+};
+
 export const OrderController = {
   createOrderCont,
+  getAllOrderCont,
 };

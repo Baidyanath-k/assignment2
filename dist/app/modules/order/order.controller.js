@@ -41,6 +41,24 @@ const createOrderCont = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
 });
+const getAllOrderCont = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield order_service_1.OrderServices.getAllOrderIntoDB();
+        res.status(400).json({
+            success: true,
+            message: "Orders fetched successfully!",
+            data: result,
+        });
+    }
+    catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "All Order data do not retrieve",
+            error: error.message,
+        });
+    }
+});
 exports.OrderController = {
     createOrderCont,
+    getAllOrderCont,
 };

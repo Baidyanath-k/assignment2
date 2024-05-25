@@ -12,9 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderServices = void 0;
 const order_model_1 = require("./order.model");
 const createOrderIntoDB = (order) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield order_model_1.OrderModel.create(order);
+    const newOrder = new order_model_1.OrderModel(order);
+    yield newOrder.save();
+    return newOrder;
+});
+const getAllOrderIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield order_model_1.OrderModel.find();
     return result;
 });
 exports.OrderServices = {
     createOrderIntoDB,
+    getAllOrderIntoDB,
 };

@@ -7,7 +7,6 @@ const OrderSchema = new Schema<TOrder>(
     email: {
       type: String,
       required: [true, "Email must be required"],
-      unique: true,
       trim: true,
       match: [
         /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
