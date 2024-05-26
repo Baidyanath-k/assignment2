@@ -18,5 +18,5 @@ router.put("/:productId", product_controller_1.ProductControllers.updateProduct)
 // Delete data by Id route use delete method
 router.delete("/:productId", product_controller_1.ProductControllers.deleteProductById);
 // search by key
-router.get("/search", product_controller_1.ProductControllers.searchOperation);
+router.get("/search/", product_controller_1.ProductControllers.searchOperation);
 exports.ProductRoutes = router;

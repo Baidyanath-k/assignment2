@@ -19,6 +19,6 @@ router.put("/:productId", ProductControllers.updateProduct);
 router.delete("/:productId", ProductControllers.deleteProductById);
 
 // search by key
-router.get("/search", ProductControllers.searchOperation);
+router.get("/search/", ProductControllers.searchOperation);
 
 export const ProductRoutes = router;
