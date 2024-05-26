@@ -3,9 +3,6 @@ import { ProductControllers } from "./product.controller";
 
 const router = express.Router();
 
-// search by key
-router.get("/", ProductControllers.searchOperation);
-
 // crated product route use post method
 router.post("/", ProductControllers.createProductController);
 
@@ -20,5 +17,8 @@ router.put("/:productId", ProductControllers.updateProduct);
 
 // Delete data by Id route use delete method
 router.delete("/:productId", ProductControllers.deleteProductById);
+
+// search by key
+router.get("/search", ProductControllers.searchOperation);
 
 export const ProductRoutes = router;
