@@ -51,6 +51,18 @@ const orderFetchedInEmail = async (req: Request, res: Response) => {
     const result = await OrderServices.orderFetchedInEmailIntoDB(
       email as string
     );
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+    if (!result || result.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
     res.status(400).json({
       success: true,
       message: "Orders fetched successfully for user email!",

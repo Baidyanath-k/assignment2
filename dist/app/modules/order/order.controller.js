@@ -62,6 +62,18 @@ const orderFetchedInEmail = (req, res) => __awaiter(void 0, void 0, void 0, func
     try {
         const email = req.query.email;
         const result = yield order_service_1.OrderServices.orderFetchedInEmailIntoDB(email);
+        if (!result) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found",
+            });
+        }
+        if (!result || result.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found",
+            });
+        }
         res.status(400).json({
             success: true,
             message: "Orders fetched successfully for user email!",
