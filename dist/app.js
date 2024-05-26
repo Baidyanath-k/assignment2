@@ -14,10 +14,10 @@ app.use((0, cors_1.default)());
 // application route
 app.use("/api/products", product_route_1.ProductRoutes);
 app.use("/api/orders", order_route_1.OrderRoutes);
-app.use((req, res, next) => {
-    res.status(404).json({ message: "Path not found" });
-});
 app.get("/", (req, res) => {
     res.send("E-commerce App Build");
+});
+app.use((req, res, next) => {
+    res.status(404).json({ message: "Path not found" });
 });
 exports.default = app;
