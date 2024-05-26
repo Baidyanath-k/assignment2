@@ -123,6 +123,12 @@ const searchOperation = (req, res) => __awaiter(void 0, void 0, void 0, function
     try {
         const searchTerm = req.query.searchTerm;
         const result = yield product_service_1.ProductServices.searchOperationIntoDB(searchTerm);
+        if (result.length === 0) {
+            return res.status(500).json({
+                success: true,
+                message: ` '${searchTerm}' product not found! `,
+            });
+        }
         res.status(200).json({
             success: true,
             message: `Products matching search term '${searchTerm}' fetched successfully!`,

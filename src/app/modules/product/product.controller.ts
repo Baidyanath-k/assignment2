@@ -119,6 +119,12 @@ const searchOperation = async (req: Request, res: Response) => {
     const result = await ProductServices.searchOperationIntoDB(
       searchTerm as string
     );
+    if (result.length === 0) {
+      return res.status(500).json({
+        success: true,
+        message: ` '${searchTerm}' product not found! `,
+      });
+    }
     res.status(200).json({
       success: true,
       message: `Products matching search term '${searchTerm}' fetched successfully!`,
